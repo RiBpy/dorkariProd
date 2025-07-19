@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Instagram, Youtube } from "lucide-react"
+import { Facebook, Twitter, Instagram, Youtube } from "react-feather";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,10 +8,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">QCY</h3>
+            <Image
+              src="/logo.png"
+              alt="DP Logo"
+              width={150}
+              height={100}
+              className="h-[100px] w-max"
+            />
             <p className="text-gray-400 mb-4">
-              Premium audio products designed for the modern lifestyle. Experience superior sound quality with our
-              innovative wireless technology.
+              Premium audio products designed for the modern lifestyle.
+              Experience superior sound quality with our innovative wireless
+              technology.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
@@ -103,9 +111,9 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 QCY. All rights reserved.</p>
+          <p>&copy; 2025 DP. All rights reserved.</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

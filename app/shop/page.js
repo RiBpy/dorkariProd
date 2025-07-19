@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Search, Grid, List } from "lucide-react"
 import Header from "@/components/Header"
-import Footer from "@/components/Footer"
+import Footer from "@/components/Footer.jsx"
 import ProductCard from "@/components/ProductCard"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
