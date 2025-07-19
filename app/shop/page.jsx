@@ -220,7 +220,7 @@ export default function ShopPage() {
         >
           {filteredProducts.map((product, index) => (
             <div key={product.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <ProductCard product={product} />
+              <ProductCard product={product} viewMode={viewMode} />
             </div>
           ))}
         </div>
