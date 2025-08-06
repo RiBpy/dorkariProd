@@ -25,7 +25,7 @@ const EditorPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-8 common-in-x">
         <h1 className="text-2xl font-semibold mb-4">Editor Panel</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
