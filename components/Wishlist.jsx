@@ -29,6 +29,7 @@ export default function Wishlist({ onClose }) {
 
   const handleAddToCart = (item) => {
     dispatch(addItemToCart(item))
+    dispatch(removeItemFromWishlist(item.id))
   }
 
   const handleCheckout = (item) => {
