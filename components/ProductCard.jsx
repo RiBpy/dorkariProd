@@ -1,15 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, Heart, Star } from "lucide-react";
+import Image from "next/image";
+import { Heart, Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useDispatch } from "react-redux";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import {
+  addItemToCart,
+} from "@/helper/redux/cart/cartSlice.js";
+import { addItemToWishlist } from "@/helper/redux/wishlist/wishlistSlice";
+import { useSelector } from "react-redux";
 
 export default function ProductCard({ product, viewMode = "grid" }) {
   const [isHovered, setIsHovered] = useState(false);
   const listView = viewMode === "list";
+  const dispatch = useDispatch();
+  const wishlisted = useSelector((state) =>
+    state.wishlist.items.find((item) => item.id === product.id)
+  );
+
+  const handleAddToCart = () => {
+    dispatch(addItemToCart(product));
+  };
+
+  const handleAddToWishlist = () => {
+    dispatch(addItemToWishlist(product));
+  };
 
   return (
     <Card
@@ -42,7 +60,11 @@ export default function ProductCard({ product, viewMode = "grid" }) {
               isHovered ? "opacity-100" : "opacity-0"
             )}
           >
-            <Button size="sm" className="bg-white text-black hover:bg-gray-100">
+            <Button
+              size="sm"
+              className="bg-white text-black hover:bg-gray-100"
+              onClick={handleAddToCart}
+            >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Add to Cart
             </Button>
@@ -50,8 +72,14 @@ export default function ProductCard({ product, viewMode = "grid" }) {
               size="sm"
               variant="outline"
               className="bg-white/90 border-white hover:bg-white"
+              onClick={handleAddToWishlist}
             >
-              <Heart className="h-4 w-4" />
+              <Heart
+                className={cn(
+                  "h-4 w-4",
+                  wishlisted ? "fill-red-500 text-red-500" : ""
+                )}
+              />
             </Button>
           </div>
 

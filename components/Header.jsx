@@ -1,14 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import Cart from "./Cart";
+import Wishlist from "./Wishlist";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
 
   return (
     <header className="bg-white shadow-sm border-b common-in-x">
@@ -64,10 +71,29 @@ export default function Header() {
               <User className="h-5 w-5" />
             </Button>
 
-            <Button variant="ghost" size="sm" className="relative">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative"
+              onClick={() => setIsWishlistOpen(true)}
+            >
+              <Heart className="h-5 w-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative"
+              onClick={() => setIsCartOpen(true)}
+            >
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
+                {totalQuantity}
               </span>
             </Button>
 
@@ -119,6 +145,8 @@ export default function Header() {
           </div>
         )}
       </div>
+      {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
+      {isWishlistOpen && <Wishlist onClose={() => setIsWishlistOpen(false)} />}
     </header>
   );
 }
