@@ -9,8 +9,7 @@ const ProfilePage = () => {
   const { user } = useAuth()
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <div className="min-h-screen bg-gray-100">
       <main className="flex-1 container mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-4">Profile</h1>
         {user && (

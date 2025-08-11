@@ -8,13 +8,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <Image
-              src="/logo.png"
-              alt="DP Logo"
-              width={150}
-              height={100}
-              className="h-[100px] w-max"
-            />
+            <div className="mb-4 flex items-center">
+              <Image
+                src="/logo_1.png"
+                alt="DP Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto object-contain"
+                priority
+              />
+            </div>
             <p className="text-gray-400 mb-4">
               Premium audio products designed for the modern lifestyle.
               Experience superior sound quality with our innovative wireless
@@ -27,8 +30,6 @@ export default function Footer() {
               <Youtube className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
             </div>
           </div>
-
-          {/* Products */}
           <div>
             <h4 className="font-semibold mb-4">Products</h4>
             <ul className="space-y-2 text-gray-400">

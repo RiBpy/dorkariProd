@@ -9,6 +9,7 @@ import ProductForm from '@/components/ProductForm'
 import ProductList from '@/components/ProductList'
 import UserList from '@/components/UserList'
 import { addProduct, updateProduct } from '@/helper/redux/product/productSlice'
+import Dashboard from '../../components/Dashboard'
 
 const AdminPage = () => {
   const dispatch = useDispatch()
@@ -28,20 +29,7 @@ const AdminPage = () => {
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8 common-in-x">
         <h1 className="text-2xl font-semibold mb-4">Admin Panel</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Product Management</h2>
-            <ProductForm onSubmit={handleProductSubmit} product={editingProduct} />
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-4">Product List</h3>
-              <ProductList onEdit={setEditingProduct} />
-            </div>
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold mb-4">User Management</h2>
-            <UserList />
-          </div>
-        </div>
+       <Dashboard/>
       </main>
       <Footer />
     </div>

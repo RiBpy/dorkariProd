@@ -130,8 +130,7 @@ export default function ShopPage() {
     })
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <div className="min-h-screen bg-white">
 
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-16">

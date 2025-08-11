@@ -85,14 +85,22 @@ export default function Header() {
                   <DropdownMenuItem asChild>
                     <Link href="/profile">Profile</Link>
                   </DropdownMenuItem>
+                  {(user.role === 'admin' || user.role === 'editor') && (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/add-product">Add Product</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/manage-product">Manage Products</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/manage-order">Manage Orders</Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
                   {user.role === 'admin' && (
                     <DropdownMenuItem asChild>
-                      <Link href="/admin">Admin Panel</Link>
-                    </DropdownMenuItem>
-                  )}
-                  {user.role === 'editor' && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/editor">Editor Panel</Link>
+                      <Link href="/admin/user-role">Manage Editors</Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
