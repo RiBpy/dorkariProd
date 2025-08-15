@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, User, Menu, X, Heart } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, Heart } from "react-feather";
+import { size } from "lodash";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -12,18 +13,25 @@ import Wishlist from "./Wishlist";
 
 import { useAuth } from "@/hooks/useAuth";
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const { user, logout, setIsLoginModalOpen } = useAuth();
-  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const { items } = useSelector((state) => state.cart);
   const wishlistCount = useSelector((state) => state.wishlist.items.length);
 
   return (
-    <header className="bg-white shadow-sm border-b common-in-x">
+    <header className="bg-white shadow-sm border-b common-in-x sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -72,7 +80,7 @@ export default function Header() {
               </Button>
             </div>
 
-            {user ? (
+            {size(user) ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
@@ -85,20 +93,22 @@ export default function Header() {
                   <DropdownMenuItem asChild>
                     <Link href="/profile">Profile</Link>
                   </DropdownMenuItem>
-                  {(user.role === 'admin' || user.role === 'editor') && (
+                  {(user.role === "admin" || user.role === "editor") && (
                     <>
                       <DropdownMenuItem asChild>
                         <Link href="/admin/add-product">Add Product</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
-                        <Link href="/admin/manage-product">Manage Products</Link>
+                        <Link href="/admin/manage-product">
+                          Manage Products
+                        </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link href="/admin/manage-order">Manage Orders</Link>
                       </DropdownMenuItem>
                     </>
                   )}
-                  {user.role === 'admin' && (
+                  {user.role === "admin" && (
                     <DropdownMenuItem asChild>
                       <Link href="/admin/user-role">Manage Editors</Link>
                     </DropdownMenuItem>
@@ -108,7 +118,11 @@ export default function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => setIsLoginModalOpen(true)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsLoginModalOpen(true)}
+              >
                 <User className="h-5 w-5" />
               </Button>
             )}
@@ -135,7 +149,7 @@ export default function Header() {
             >
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {totalQuantity}
+                {size(items)}
               </span>
             </Button>
 
@@ -192,4 +206,3 @@ export default function Header() {
     </header>
   );
 }
-

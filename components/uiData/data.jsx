@@ -1,3 +1,5 @@
+import { uniqueId } from "lodash";
+
 export const heroSlides = [
   {
     id: 1,
@@ -30,62 +32,84 @@ export const heroSlides = [
 
 export const sampleProducts = [
   {
-    id: 1,
+    id: uniqueId('dorkariProd_'),
     name: "QCY HT10 AilyBuds Pro",
     price: 79.99,
     originalPrice: 99.99,
     image: "/images/c3.png",
+    images: ["/images/c3.png", "/images/i1.png", "/images/qcy-hero.jpeg"],
     rating: 5,
     reviews: 124,
     onSale: true,
   },
   {
-    id: 2,
+    id: uniqueId('dorkariProd_'),
     name: "QCY T13 ANC",
     price: 59.99,
     image:
       "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030119710-c2.png?alt=media&token=2c482b4e-d81b-4a27-9e70-a55d87a020ba",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030119710-c2.png?alt=media&token=2c482b4e-d81b-4a27-9e70-a55d87a020ba",
+      "/images/c3.png",
+      "/images/qcy-hero.jpeg",
+    ],
     rating: 4,
     reviews: 89,
     onSale: false,
   },
   {
-    id: 3,
+    id: uniqueId('dorkariProd_'),
     name: "QCY T17 Sport",
     price: 49.99,
     originalPrice: 69.99,
     image:
       "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662406275200-r3.png?alt=media&token=840b320f-3146-43e1-ab72-90f25bb2a205",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662406275200-r3.png?alt=media&token=840b320f-3146-43e1-ab72-90f25bb2a205",
+      "/images/i1.png",
+      "/images/c3.png",
+    ],
     rating: 4,
     reviews: 156,
     onSale: true,
   },
   {
-    id: 4,
+    id: uniqueId('dorkariProd_'),
     name: "QCY T5 Pro",
     price: 39.99,
     image: "/images/i1.png",
+    images: ["/images/i1.png", "/images/c3.png", "/images/qcy-hero.jpeg"],
     rating: 4,
     reviews: 203,
     onSale: false,
   },
   {
-    id: 5,
+    id: uniqueId('dorkariProd_'),
     name: "QCY T1C",
     price: 29.99,
     originalPrice: 39.99,
     image:
       "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030336619-r2.png?alt=media&token=828a72b6-cfee-4125-bd8f-4754f81cbfe5",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030336619-r2.png?alt=media&token=828a72b6-cfee-4125-bd8f-4754f81cbfe5",
+      "/images/qcy-hero.jpeg",
+      "/images/i1.png",
+    ],
     rating: 3,
     reviews: 67,
     onSale: true,
   },
   {
-    id: 6,
+    id: uniqueId('dorkariProd_'),
     name: "QCY L2 ANC",
     price: 89.99,
     image:
       "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030505579-fi2.png?alt=media&token=82e61aea-2aaf-4331-a4c4-689ed56e77c6",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/restaurantapp-dfe7e.appspot.com/o/images%2F1662030505579-fi2.png?alt=media&token=82e61aea-2aaf-4331-a4c4-689ed56e77c6",
+      "/images/c3.png",
+      "/images/qcy-hero.jpeg",
+    ],
     rating: 5,
     reviews: 45,
     onSale: false,

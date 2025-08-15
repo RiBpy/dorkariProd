@@ -9,9 +9,8 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "QCY - Premium Audio Products",
-  description: "Discover QCY premium wireless earbuds and audio products",
-  generator: "v0.dev",
+  title: "DorkariProd -some hope",
+  description: "An e-commerce platform for all your needs",
 };
 
 export default function RootLayout({ children }) {

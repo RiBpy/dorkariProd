@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Heart, Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,6 +13,9 @@ import {
 } from "@/helper/redux/cart/cartSlice.js";
 import { addItemToWishlist } from "@/helper/redux/wishlist/wishlistSlice";
 import { useSelector } from "react-redux";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function ProductCard({ product, viewMode = "grid" }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -21,12 +25,23 @@ export default function ProductCard({ product, viewMode = "grid" }) {
     state.wishlist.items.find((item) => item.id === product.id)
   );
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault();
     dispatch(addItemToCart(product));
   };
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
     dispatch(addItemToWishlist(product));
+  };
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
   };
 
   return (
@@ -38,58 +53,66 @@ export default function ProductCard({ product, viewMode = "grid" }) {
       <CardContent
         className={cn("p-4", listView ? "flex items-center" : "flex flex-col")}
       >
-        <div className="relative">
-          {/* Product Image */}
-          <div className="aspect-square bg-gray-100 overflow-hidden">
-            <Image
-              src={product.image || "/placeholder.svg"}
-              alt={product.name}
-              className={cn(
-                "transition-transform duration-300 group-hover:scale-105  object-cover ",
-                listView ? "max-w-[300px] max-h-[300px]" : "w-full h-full "
-              )}
-              width={300}
-              height={300}
-            />
-          </div>
-
-          {/* Hover Overlay */}
-          <div
-            className={cn(
-              "absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-opacity duration-300",
-              isHovered ? "opacity-100" : "opacity-0"
-            )}
-          >
-            <Button
-              size="sm"
-              className="bg-white text-black hover:bg-gray-100"
-              onClick={handleAddToCart}
-            >
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              Add to Cart
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              className="bg-white/90 border-white hover:bg-white"
-              onClick={handleAddToWishlist}
-            >
-              <Heart
-                className={cn(
-                  "h-4 w-4",
-                  wishlisted ? "fill-red-500 text-red-500" : ""
-                )}
-              />
-            </Button>
-          </div>
-
-          {/* Sale Badge */}
-          {product.onSale && (
-            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-semibold rounded">
-              SALE
+        <Link href={`/shop/${product.id}`} passHref>
+          <div className="relative">
+            {/* Product Image Slider */}
+            <div className="aspect-square bg-gray-100 overflow-hidden">
+              <Slider {...sliderSettings}>
+                {product?.images?.map((img, index) => (
+                  <div key={index}>
+                    <Image
+                      src={img || "/placeholder.svg"}
+                      alt={`${product.name} - ${index}`}
+                      className={cn(
+                        "transition-transform duration-300 group-hover:scale-105 object-cover",
+                        listView ? "max-w-[300px] max-h-[300px]" : "w-full h-full"
+                      )}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                ))}
+              </Slider>
             </div>
-          )}
-        </div>
+
+            {/* Hover Overlay */}
+            <div
+              className={cn(
+                "absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-opacity duration-300",
+                isHovered ? "opacity-100" : "opacity-0"
+              )}
+            >
+              <Button
+                size="sm"
+                className="bg-white text-black hover:bg-gray-100"
+                onClick={handleAddToCart}
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Add to Cart
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="bg-white/90 border-white hover:bg-white"
+                onClick={handleAddToWishlist}
+              >
+                <Heart
+                  className={cn(
+                    "h-4 w-4",
+                    wishlisted ? "fill-red-500 text-red-500" : ""
+                  )}
+                />
+              </Button>
+            </div>
+
+            {/* Sale Badge */}
+            {product.onSale && (
+              <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-semibold rounded">
+                SALE
+              </div>
+            )}
+          </div>
+        </Link>
 
         {/* Product Info */}
         <div className="p-4">
@@ -129,3 +152,4 @@ export default function ProductCard({ product, viewMode = "grid" }) {
     </Card>
   );
 }
+

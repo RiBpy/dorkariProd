@@ -4,8 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   users: [
-    { id: 1, name: 'Admin User', email: 'admin@example.com', role: 'admin' },
-    { id: 2, name: 'Editor User', email: 'editor@example.com', role: 'editor' },
+    { id: 1, name: 'Admin User', email: 'admin@gmail.com', role: 'admin' },
+    { id: 2, name: 'Editor User', email: 'editor@gmail.com', role: 'editor' },
   ],
 }
 
